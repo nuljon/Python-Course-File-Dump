@@ -11,5 +11,5 @@ if x ==10:
 # Print  x + y
 
 ''' Prnts x + Y
-to he shell '''
+to the shell '''
 print (x + y)
