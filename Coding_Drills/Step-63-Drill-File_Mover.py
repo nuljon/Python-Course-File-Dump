@@ -36,7 +36,7 @@ for files in filesList:
     filePath = os.path.join(pathFolderA, files)
     # move the file to the destination folderB
     move(filePath,pathFolderB)
-    # update the poth to file in folderB
+    # update the path to file in folderB
     filePath = os.path.join(pathFolderB, files)
     # outout the url of the file to console
     print filePath + "\n"

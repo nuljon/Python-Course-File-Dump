@@ -33,3 +33,60 @@
 # Once you create a functioning script that is approved by your instructor,
 # save it for later use. Do not modify this saved copy during subsequent
 # drills.
+import os
+from datetime import *
+import shutil
+
+# a function listing updated files in a folder within a time range in hours
+def listUpdatedFiles (folder, Hours):
+    # set our cut off for accepting changes
+    review  = datetime.now() - timedelta(hours=Hours)
+    # initialize our list of updates
+    updateList = []
+    # iterate through the items in the folder
+    for items in os.listdir(folder):
+        # assemble path to items
+        item = os.path.join(folder, items)
+        # print item  + "\n"    # debug
+        # check if it is a file
+        if os.path.isfile(item):
+            # and if it is a change within review period
+            # print review
+           #  print os.path.getmtime(item)  # debug
+            # convert getmtime timestamp to datetime compare to review limit
+            if (review <= datetime.fromtimestamp(os.path.getmtime(item))):
+               # append this item to our update list
+                updateList.append(item)
+            else: #item is a file but not within review limit so continue
+                continue
+        else: # item is not a file so continue
+            continue
+    # we are done iterating so return with the update list
+    return updateList
+
+
+# a function to copy a list of pathed files to a destinaion
+def copyFiles (files, destination):
+    # for each of the files in the list
+    for file in files:
+        # copy file to destination
+        shutil.copy(file, destination)
+    # done iteration - nothing to return
+    return
+
+if __name__ == '__main__':
+
+    ### define CONSTANTS
+    # staging yard to look for new files or ones that have recently been modified
+    stagingYard = "C:\Users\Student\Desktop\stage"
+    # "destination" where we put a copy of the files for transport to home office
+    destination = "C:\Users\Student\Desktop\updates"
+    # time we will look back in hours
+    hoursToReview = 24
+
+    # run the funtions to get list of updates and copy them to destination
+    updates = listUpdatedFiles(stagingYard, hoursToReview)
+    copyFiles(updates, destination)
+
+    # Then try getmtime - format and print for debug
+    # print time.strftime("%m/%d/%Y %I:%M:%S %p",time.localtime(os.path.getmtime(filePath)))
