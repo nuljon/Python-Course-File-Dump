@@ -4,7 +4,7 @@
 # presenting Python GUI Development with Tkinter on lynda.com
 
 from tkinter import *       # import the module  that ships with Python for GUI  App  devs  - uses tcl framework
-from tkinter import ttk   # import  ttk  specifically as it  holds classes for each of the standard widgets 
+from tkinter import ttk   # import  ttk  specifically as it  holds classes for each of the standard widgets
 
 class deCalifornicator:                 # define GUI application as a class so the  GUI can be a component within a larger OOP
 
@@ -12,8 +12,8 @@ class deCalifornicator:                 # define GUI application as a class so t
 
         self.label = ttk.Label(master, text = "Where you from?")        # this is the master window  = root.label
         self.label.grid(row = 0, column = 0, columnspan = 2)        # this is the geometry for laying out children
-        
-        ttk.Button(master, text = "OR EE GUN",                                          # this is a button widget  labeld  OR EE GUN 
+
+        ttk.Button(master, text = "OR EE GUN",                                          # this is a button widget  labeld  OR EE GUN
                    command = self.oregon_hello).grid(row = 1, column = 0) # this defines the event handler and button location
 
         ttk.Button(master, text = "WASH ING TON",                                # this is another button labeled  -  WASH ING TON
@@ -30,11 +30,11 @@ class deCalifornicator:                 # define GUI application as a class so t
 
     def california_hello(self):                                                                 # handler for  Cali FORNICATOR
         self.label.config(text = "Turn that thing the other way! Californicator")
-            
+
 def main():            #this is the main program  as a function
-    
+
     root = Tk()             # create the top level application window called root
-    app = deCalifornicator(root)        # create  instance of the  HelloApp Class  pass (root) as master
-    root.mainloop()     #  emter mainloop metod  of Tk() class from out root  instance   - waits for event
-    
-if __name__ == "__main__": main()       # here  is  only executed if file run directly - formed thus , this file can become  a module for the  deCalifornicator class
+    app = deCalifornicator(root)        # create  instance of the  deCalifornicator Class  pass (root) as master
+    root.mainloop()     #  enter mainloop method  of Tk() class from our root  instance   - eternally wathces for an intersting event, that is an event that is bound to a widgett
+
+if __name__ == "__main__": main()       # this  is  only executed if file run directly - formed thus , this file can become  a module for the  deCalifornicator class
