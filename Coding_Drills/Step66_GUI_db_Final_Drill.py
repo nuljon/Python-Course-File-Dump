@@ -4,9 +4,12 @@
 #   by Jon Nuljon
 #   December, 2016
 #
-#  This softeware program is dedicated to Norman Olds Jr. died December 19 2016
-#  In his honour I pursure graphic interface design and user control styling
-#  Norman was a graphic artist and a my creative partner among other things
+#  This software program is dedicated to Norman Olds Jr. died December 19, 2016
+#  Among other things, Norman was a graphic artist, sculptor, and designer of
+#  functional systems of all sorts. I am fortunate to have worked beside him as
+#  as a creative partner. From now on, my studies of graphic interface design and
+#  presentation styling will be to honor his memory. God bless you Norman, may
+#  your journey find progressive harbors and sublime reward.
 ################################################################################
 #  THE FOLLOWING IS FROM THE ORIGINAL PROGRAMMING DRILL DESCRIPTION
 #  Title: Database functionality for File Transfer - Python 3.4 – IDLE
