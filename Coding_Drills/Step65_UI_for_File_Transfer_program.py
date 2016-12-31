@@ -24,22 +24,12 @@
 #   You should use IDLE for this Drill.
 ###############################################################################
 from tkinter import *
-from tkinter import filedialog
-import FolderMonitor
-
-# the FolderMonitor module has two functions:
-# listUpdatedFiles(folder, hours)
-#   given a folder and #hours to detect modifications it returns list of files
-# copyFiles(fileList, Folder)
-#   given a list of files and a folder it will copy those files to that folder
-
-'''
 from tkinter import ttk
-from datetime import *
-import shutil
-import os
-'''
+from tkinter import filedialog
+import FolderMonitorOld
 
+# this is the Application Class for the FileTransferApp
+# all of the GUI layout and controls are contained in here
 
 class FileTransferApp:
 
@@ -68,7 +58,7 @@ class FileTransferApp:
         self.stagingFolder.grid(row=2,column=0, columnspan=2)
         # now we need a browse button so the user can browse for the folder
         # use lambda to pass our browse function a value - source
-        Button(self.container, text="Browse", command=lambda: self.browse_folder("source")).grid(row=2, column=3) # put it on the right
+        ttk.Button(self.container, text="Browse", command=lambda: self.browse_folder("source")).grid(row=2, column=3) # put it on the right
         # we need another label for the destinationFolder
         destinationLabel = "Please enter the destination where you wish to copy your updates:"
         Label(self.container, text=destinationLabel).grid(row=3, column=0, columnspan=3, sticky=W)
@@ -76,19 +66,27 @@ class FileTransferApp:
         self.destinationFolder = Entry(self.container)
         self.destinationFolder["width"] = 60
         self.destinationFolder.grid(row=4,column=0, columnspan=2)
-        # now we need a browse button so the user can browse for the folder
-        # use lambda to pass our browse function a value - destination
-        Button(self.container, text="Browse", command=lambda: self.browse_folder("destination")).grid(row=4, column=3) # put it on the right of the text field
+        ttk.Button(self.container, text="Browse", command=lambda: self.browse_folder("destination")).grid(row=4, column=3) # put it on the right of the text field
 
         # we need another label for the user to input # of hours to review for new or modified files
         hoursLabel = "Please input the number of hours to review for new or modified files:"
         Label(self.container, text=hoursLabel).grid(row=5, column=0, columnspan=3, sticky=W)
-        # we need a entry text box for entering the destination folder we monitor
+        # we need a entry text box for entering the number of hours we monitor
         self.hours = Entry(self.container)
         self.hours["width"] = 2 # allow 2 digits to acquire 72 hours for weekends
         self.hours.grid(row=6,column=1,sticky=E)
         # now we need a button to execute the updates
-        Button(self.container, text="Copy Updates", command=self.copyUpdates).grid(row=6, column=3) # put it on the right of the text field
+        ttk.Button(self.container, text="Copy Updates", command=self.copyUpdates).grid(row=6, column=3) # put it on the right of the text field
+
+        #create style object to  capture our style settings
+        style = ttk.Style()
+
+        print(style.theme_names())      # gives available style name values
+        print(style.theme_use())        # assign  theme for use
+        style.theme_use('classic')
+        #style.theme_use('vista')
+        #style.theme_use('xpnative')
+        # style.theme_use('winnative')
 
 
     # the browse folder method requires we pass the folder we're browsing
@@ -105,7 +103,7 @@ class FileTransferApp:
             else: # this should not execute - so something has gone wrong if here
                 print("Something has gone wrong - browsing undefined folder")
 
-    # the copy updates method reads our entry fields and calls FolderMonitor functions
+    # the copy updates method reads our entry fields and calls FolderMonitorOld functions
     def copyUpdates(self):
         folder = self.stagingFolder.get()
         Hours = self.hours.get()
@@ -113,21 +111,14 @@ class FileTransferApp:
             Hours=int(Hours)
         else:
             Hours = 24
-        files = FolderMonitor.listUpdatedFiles(folder, int(Hours))
+        files = FolderMonitorOld.listUpdatedFiles(folder, int(Hours))
         folder = self.destinationFolder.get()
-        FolderMonitor.copyFiles(files, folder)
+        FolderMonitorOld.copyFiles(files, folder)
         quit()
 
+########################### End of FileTransferApp Class ##########################
 
-
-
-
-
-
-
-
-
-# this is the main program  as a function to be called only if necessary
+# the main program loop as a function, called only if this file is run driectly
 def main():
     root = Tk()   # create the top level application window called root
     myFileTransferApp = FileTransferApp(root) # create  instance of the  App Class  passing root as parent

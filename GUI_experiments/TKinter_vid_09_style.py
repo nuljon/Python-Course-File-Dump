@@ -28,7 +28,7 @@ style.map('Alarm.TButton', foreground = [('pressed', 'pink'),
 #button2.state(['disabled'])
 
 print(style.layout('TButton')) #lists  elements in a style
-print(style.element_options('Button.label')) #lists  available for customization
-print(style.lookup('TButton', 'foreground')) #lookups style TButton foreground setting
+#print(style.element_options('Button.label')) #lists  available for customization
+#print(style.lookup('TButton', 'foreground')) #lookups style TButton foreground setting
 
 root.mainloop()
